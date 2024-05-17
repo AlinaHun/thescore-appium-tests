@@ -11,3 +11,9 @@ class LeaguePage(BasePage):
     def click_standings_tab(self):
         standings_tab = self.driver.find_element(*LeaguePageLocators.STANDINGS_TAB)
         standings_tab.click()
+
+    # Method to select a random league
+    def select_league(self):
+        resource_id = "com.fivemobile.thescore:id/league_name_text"
+        random_league = BasePage.select_random_name(resource_id)
+        return random_league
