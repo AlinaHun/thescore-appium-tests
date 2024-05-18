@@ -1,5 +1,7 @@
 import pytest
 from appium import webdriver
+from pages.base_page import BasePage
+from pages.locators.home_page_locators import HomePageLocators
 
 @pytest.fixture(scope="module")
 def driver():
@@ -10,5 +12,10 @@ def driver():
         "automationName": "UiAutomator2"
     }
     driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+
+    # Wait for the app to start before running tests
+    base_page = BasePage(driver)
+    base_page.wait_for_app_to_start(HomePageLocators.WELCOME_SIGN)
+
     yield driver
     driver.quit()

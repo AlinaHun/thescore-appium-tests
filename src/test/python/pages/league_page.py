@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators.league_page_locators import LeaguePageLocators
+from .home_page import HomePage
 
 # LeaguePage class to handle league-related functionality
 class LeaguePage(BasePage):
@@ -12,8 +13,49 @@ class LeaguePage(BasePage):
         standings_tab = self.driver.find_element(*LeaguePageLocators.STANDINGS_TAB)
         standings_tab.click()
 
-    # Method to select a random league
-    def select_league(self):
-        resource_id = "com.fivemobile.thescore:id/league_name_text"
-        random_league = BasePage.select_random_name(resource_id)
-        return random_league
+    # Method to scroll to the league
+    def scroll_to_name(self, name):
+        # Scroll to the specified name
+        self.scroll_to_and_select_link(name)
+
+    # Method to select the league
+    def click_name(self, name):
+        # Click on the specified name
+        name_element = self.driver.find_element(*LeaguePageLocators.LEAGUE_NAME(name))
+        name_element.click()
+
+    # Method to verify the opened league
+    def verify_opened_name(self, name):
+        # Verify that the opened name matches the specified name
+        opened_name_element = self.driver.find_element(*LeaguePageLocators.OPENED_NAME_LOCATOR)
+        opened_name = opened_name_element.text
+        assert opened_name == name, f"Expected name: {name}, Actual name: {opened_name}"
+
+    def select_first_league_and_click_continue(self):
+        # Wait for leagues list
+        self.wait_for_element(LeaguePageLocators.LEAGUES_LIST)
+        # Find the list of leagues
+        elements = self.driver.find_elements(*LeaguePageLocators.LEAGUES_LIST)
+
+        if elements:
+            # Click on the first element
+            elements[0].click()
+            # Click on the "Continue" button
+            self.click_continue_button()
+        else:
+            raise Exception("No elements found in the list")
+
+    def close_welcome_popup(self):
+        home_page = HomePage(self)
+        # Press maybe later button
+        self.click_maybe_later()
+        # Click on the "Continue" button
+        self.click_continue_button()
+        # Click on the "Continue" button
+        self.click_continue_button()
+        # Press maybe later button
+        self.click_maybe_later_sign_up()
+        # Click on the "Don't allow" button
+        self.click_dont_allow_button()
+
+
