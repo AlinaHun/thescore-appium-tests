@@ -9,6 +9,6 @@ def driver():
         "app": r"C:\Users\grand\thescore-appium-tests\src\test\appium\score.apk",
         "automationName": "UiAutomator2"
     }
-    driver = webdriver.Remote("http://localhost:4723", desired_caps)
+    driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
     yield driver
     driver.quit()
