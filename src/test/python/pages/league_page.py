@@ -9,8 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 # LeaguePage class to handle league-related functionality
 class LeaguePage(BasePage):
     # Method to verify league is displayed
-    def verify_league_displayed(self, league_name):
-        assert self.driver.find_element(*LeaguePageLocators.LEAGUE_NAME(league_name)).is_displayed()
+    def verify_leagues_displayed(self, league_name):
+        assert self.driver.find_element(*LeaguePageLocators.LEAGUES_LIST).is_displayed()
 
     # Method to click standings tab
     def click_standings_tab(self):

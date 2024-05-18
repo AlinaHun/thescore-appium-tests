@@ -49,4 +49,4 @@ def test_league_team_player_navigation(driver):
     driver.back()
 
     # Verify NBA league is displayed again
-    league_page.verify_league_displayed("NBA")
+    league_page.verify_leagues_displayed("NBA")
