@@ -15,14 +15,16 @@ class BasePage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 20)
 
-    def scroll_down(self):
-        # Adjust these coordinates based on your screen size and layout
-        start_x = 500
-        start_y = 1500
-        end_x = 500
-        end_y = 500
-        actions = TouchAction(self.driver)
-        actions.press(x=start_x, y=start_y).move_to(x=end_x, y=end_y).release().perform()
+    # def scroll_down(self):
+    #     # Adjust these coordinates based on your screen size and layout
+    #     start_x = 500
+    #     start_y = 1500
+    #     end_x = 500
+    #     end_y = 500
+    #     actions = TouchAction(self.driver)
+    #     actions.press(x=start_x, y=start_y).move_to(x=end_x, y=end_y).release().perform()
+    #
+
 
     def get_all_names(self, resource_id):
         all_names = set()
@@ -124,15 +126,27 @@ class BasePage:
         xpath = f"//android.widget.TextView[@resource-id='com.fivemobile.thescore:id/league_name_text' and @text='{link_text}']"
         link_locator = (By.XPATH, xpath)
 
-        try:
-            link_element = self.wait.until(EC.visibility_of_element_located(link_locator))
-            # Scroll to the link element
-            self.driver.execute_script("arguments[0].scrollIntoView();", link_element)
-            # Click on the link element
-            link_element.click()
-        except Exception as e:
-            print(f"Failed to scroll to or select link with text '{link_text}'.")
-            print(e)
+        for _ in range(5):  # Try scrolling up to 5 times
+            try:
+                link_element = self.wait.until(EC.presence_of_element_located(link_locator))
+                link_element.click()
+                return
+            except Exception:
+                self.scroll_down()
+        raise Exception(f"Failed to scroll to or select link with text '{link_text}' after 5 attempts.")
+
+    def scroll_down(self):
+        """
+        Scrolls down the page using TouchAction.
+        """
+        screen_size = self.driver.get_window_size()
+        start_x = screen_size['width'] // 2
+        start_y = screen_size['height'] * 3 // 4
+        end_x = screen_size['width'] // 2
+        end_y = screen_size['height'] // 4
+
+        actions = TouchAction(self.driver)
+        actions.press(x=start_x, y=start_y).wait(ms=1000).move_to(x=end_x, y=end_y).release().perform()
 
 
 
