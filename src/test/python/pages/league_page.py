@@ -1,6 +1,8 @@
 from .base_page import BasePage
 from .locators.league_page_locators import LeaguePageLocators
 from .home_page import HomePage
+from selenium.webdriver.support import expected_conditions as EC
+
 
 # LeaguePage class to handle league-related functionality
 class LeaguePage(BasePage):
@@ -57,5 +59,13 @@ class LeaguePage(BasePage):
         self.click_maybe_later_sign_up()
         # Click on the "Don't allow" button
         self.click_dont_allow_button()
+
+    def tap_on_sub_tab(self, tab_name):
+        tab_locator = (By.XPATH, f"//android.widget.TextView[@text='{tab_name}']")
+        self.wait.until(EC.presence_of_element_located(tab_locator)).click()
+
+    def verify_on_correct_tab(self, tab_name):
+        tab_locator = (By.XPATH, f"//android.widget.TextView[@text='{tab_name}' and @selected='true']")
+        assert self.wait.until(EC.presence_of_element_located(tab_locator)).is_displayed()
 
 
