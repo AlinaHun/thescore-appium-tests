@@ -39,11 +39,11 @@ def test_league_team_player_navigation(driver):
     # Verify correct league is displayed
     league_page.verify_opened_name("NBA")
 
-    # Initialize StandingsPage
-    standings_page = StandingsPage(driver)
+    # Open the sub tab
+    league_page.tap_on_sub_tab("STANDINGS")
 
     # Verify standings are displayed
-    standings_page.verify_standings_displayed()
+    league_page.verify_on_correct_tab("STANDINGS")
 
     # Navigate back
     driver.back()
