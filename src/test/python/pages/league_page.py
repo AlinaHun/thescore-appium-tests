@@ -22,6 +22,9 @@ class LeaguePage(BasePage):
         # Wait for leagues list
         self.wait_for_element(LeaguePageLocators.LEAGUES_LIST_MAIN)
 
+        # Close quick tips
+        self.click_edit_button()
+
         # Scroll to the specified name
         self.scroll_to_and_select_link(name)
 
@@ -58,7 +61,6 @@ class LeaguePage(BasePage):
 
     # Method to close all welcome pop up windows
     def close_welcome_popup(self):
-        home_page = HomePage(self)
         # Press maybe later button
         self.click_maybe_later()
         # Click on the "Continue" button
@@ -79,3 +81,7 @@ class LeaguePage(BasePage):
     def verify_on_correct_tab(self, tab_name):
         tab_locator = (By.XPATH, f"//android.widget.TextView[@text='{tab_name}' and @selected='true']")
         assert self.wait.until(EC.presence_of_element_located(tab_locator)).is_displayed()
+
+    def close_quick_tip(self):
+        # Press edit button
+        self.click_edit_button()

@@ -126,3 +126,15 @@ class BasePage:
 
         actions = TouchAction(self.driver)
         actions.press(x=start_x, y=start_y).wait(ms=1000).move_to(x=end_x, y=end_y).release().perform()
+
+    def click_edit_button(self):
+        """
+        Clicks on the "Edit" button if present on the page.
+        """
+        edit_button_locator = (By.ID, "com.fivemobile.thescore:id/header_right_text_container")
+        try:
+            edit_button = self.wait.until(EC.element_to_be_clickable(edit_button_locator))
+            edit_button.click()
+        except Exception as e:
+            print("Edit button not found on the page.")
+            print(e)
