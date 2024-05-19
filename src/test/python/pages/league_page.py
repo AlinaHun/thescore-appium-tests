@@ -19,6 +19,9 @@ class LeaguePage(BasePage):
 
     # Method to scroll to the league
     def scroll_to_name(self, name):
+        # Wait for leagues list
+        self.wait_for_element(LeaguePageLocators.LEAGUES_LIST_MAIN)
+
         # Scroll to the specified name
         self.scroll_to_and_select_link(name)
 
@@ -30,6 +33,9 @@ class LeaguePage(BasePage):
 
     # Method to verify the opened league
     def verify_opened_name(self, name):
+        # Wait for league to open
+        self.wait_for_element(LeaguePageLocators.OPENED_NAME_LOCATOR)
+
         # Verify that the opened name matches the specified name
         opened_name_element = self.driver.find_element(*LeaguePageLocators.OPENED_NAME_LOCATOR)
         opened_name = opened_name_element.text

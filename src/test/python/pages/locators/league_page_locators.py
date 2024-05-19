@@ -20,5 +20,9 @@ class LeaguePageLocators:
     # Leagues list on "choose your favorite league" page
     LEAGUES_LIST = (MobileBy.ID, "com.fivemobile.thescore:id/recyclerView")
 
+    # Leagues list on Ligues page
+    LEAGUES_LIST_MAIN = (MobileBy.XPATH,
+                         '''(//android.widget.FrameLayout[@resource-id="com.fivemobile.thescore:id/nav_host_container"])[2]/android.view.ViewGroup''')
+
     # Continue button on "choose your favorite league" page
     CONTINUE_BUTTON = (MobileBy.ID, "com.fivemobile.thescore:id/btn_primary")

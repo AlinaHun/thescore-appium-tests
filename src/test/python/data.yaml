@@ -1,7 +1,5 @@
-leagues:
-  - NBA
+league:
   - BMA
 
-teams:
+team:
   -LAL
-  -BOS
