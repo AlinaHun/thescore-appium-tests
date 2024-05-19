@@ -1,30 +1,16 @@
 import time
-import random
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-
-
-# BasePage class to define common methods and attributes
 from uamqp.compat import TimeoutException
 
 
+# BasePage class to define common methods and attributes
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 20)
-
-    # def scroll_down(self):
-    #     # Adjust these coordinates based on your screen size and layout
-    #     start_x = 500
-    #     start_y = 1500
-    #     end_x = 500
-    #     end_y = 500
-    #     actions = TouchAction(self.driver)
-    #     actions.press(x=start_x, y=start_y).move_to(x=end_x, y=end_y).release().perform()
-    #
-
 
     def get_all_names(self, resource_id):
         all_names = set()
@@ -40,7 +26,6 @@ class BasePage:
                 # Wait for the page to load after scrolling
                 time.sleep(1)
         return list(all_names)
-
 
     def wait_for_page_change(self, old_page):
         """
@@ -58,12 +43,6 @@ class BasePage:
         Waits for an element to be present in the DOM.
         """
         self.wait.until(EC.presence_of_element_located(locator))
-    #
-    # def wait_for_element_to_disappear(self, locator):
-    #     """
-    #     Waits for an element to disappear from the DOM.
-    #     """
-    #     self.wait.until_not(EC.presence_of_element_located(locator))
 
     def wait_for_app_to_start(self, locator):
         """
@@ -147,10 +126,3 @@ class BasePage:
 
         actions = TouchAction(self.driver)
         actions.press(x=start_x, y=start_y).wait(ms=1000).move_to(x=end_x, y=end_y).release().perform()
-
-
-
-
-
-
-

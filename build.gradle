@@ -1,23 +1,18 @@
-// Define plugins for Gradle
 plugins {
     id 'java'
 }
 
-// Configure repositories for dependencies
 repositories {
-    mavenCentral() // Use Maven Central repository
+    mavenCentral()
 }
 
-// Define dependencies for the project
 dependencies {
-    // Add dependencies for Python tests
-    implementation 'io.appium:java-client:7.3.0' // Example dependency, adjust as needed
+    implementation 'io.appium:java-client:7.3.0'
 }
 
-// Define tasks for setup and running tests
 task setup(type: Exec) {
     dependsOn clean
-    commandLine 'pip', 'install', 'pytest'
+    commandLine 'pip', 'install', '-r', 'requirements.txt'
 }
 
 task runTests(type: Exec) {
@@ -25,5 +20,4 @@ task runTests(type: Exec) {
     commandLine 'pytest'
 }
 
-// Set default task to run tests
 defaultTasks 'runTests'

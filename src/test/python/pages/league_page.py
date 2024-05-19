@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # LeaguePage class to handle league-related functionality
 class LeaguePage(BasePage):
     # Method to verify league is displayed
-    def verify_leagues_displayed(self, league_name):
+    def verify_leagues_displayed(self):
         assert self.driver.find_element(*LeaguePageLocators.LEAGUES_LIST).is_displayed()
 
     # Method to click standings tab
@@ -35,6 +35,7 @@ class LeaguePage(BasePage):
         opened_name = opened_name_element.text
         assert opened_name == name, f"Expected name: {name}, Actual name: {opened_name}"
 
+    # Method to select the first league and click "continue" button
     def select_first_league_and_click_continue(self):
         # Wait for leagues list
         self.wait_for_element(LeaguePageLocators.LEAGUES_LIST)
@@ -49,6 +50,7 @@ class LeaguePage(BasePage):
         else:
             raise Exception("No elements found in the list")
 
+    # Method to close all welcome pop up windows
     def close_welcome_popup(self):
         home_page = HomePage(self)
         # Press maybe later button
@@ -62,12 +64,12 @@ class LeaguePage(BasePage):
         # Click on the "Don't allow" button
         self.click_dont_allow_button()
 
+    # Method to click sub tab page
     def tap_on_sub_tab(self, tab_name):
         tab_locator = (By.XPATH, f"//android.widget.TextView[@text='{tab_name}']")
         self.wait.until(EC.presence_of_element_located(tab_locator)).click()
 
+    # Method to check if on correct page
     def verify_on_correct_tab(self, tab_name):
         tab_locator = (By.XPATH, f"//android.widget.TextView[@text='{tab_name}' and @selected='true']")
         assert self.wait.until(EC.presence_of_element_located(tab_locator)).is_displayed()
-
-

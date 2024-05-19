@@ -1,40 +1,121 @@
 # thescore-appium-tests
 
-## Description
-This project contains automated tests for the theScore mobile application using the Appium framework. The tests are written in Python and utilize the pytest testing framework.
+# Automated Testing for Mobile App
 
-## Features
-- Automated testing of the theScore mobile application.
-- Navigation to league, team, or player pages.
-- Verification of page content and navigation.
+This project is for automated testing of a mobile application using Appium and Python. 
+The tests navigate through the app and verify various functionalities.
 
 ## Prerequisites
-To run the tests, you'll need the following prerequisites:
-- Java 11
-- Appium 2
-- Python
-- pytest
-- Android emulator or device
 
-## Installation
-1. Clone the repository to your local machine.
-2. Ensure Java 11 is installed and configured properly.
-3. Install Appium 2 on your machine.
-4. Set up Python and install the pytest library.
-5. Download the score.apk file and place it in the appium/ directory.
+- [Java 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/get-npm)
+- [Appium 2.x](http://appium.io/docs/en/about-appium/intro/)
+- [Android SDK](https://developer.android.com/studio#downloads)
+- [Python 3.x](https://www.python.org/downloads/)
+- [Gradle](https://gradle.org/install/)
 
-## Usage
-1. Open a terminal and navigate to the project directory.
-2. Run the following command to initialize the environment and install dependencies:
-     gradle runTests
-3. Once the environment is set up, you can run the tests using the following command:
-  gradle runTests
-   
-## Testing
-Tests are located in the src/test/python directory. You can run individual test files or the entire test suite using pytest.
+## Setup Instructions
 
-## Contributing
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+1. **Install Java:**
 
-## Contact
-For questions or inquiries, please contact Alina Hunter at 180896alinasam@gmail.com.
+    Download and install Java 11 from the [official website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+
+2. Install Node.js and npm:
+
+    Download and install Node.js from the [official website](https://nodejs.org/). npm is included with Node.js.
+
+3. Install Appium:
+
+    Install Appium globally using npm:
+
+    ```sh
+    npm install -g appium
+    
+4. Create and Activate a Virtual Environment:
+
+    Navigate to your project directory and create a virtual environment:
+
+       python -m venv venv
+    
+    Activate the virtual environment:
+
+    - Windows:
+
+               .\venv\Scripts\activate
+        
+    - macOS/Linux:
+
+               source venv/bin/activate
+        
+5. Install Python packages:
+
+    With the virtual environment activated, install the required Python packages:
+
+       pip install -r requirements.txt
+    
+6. Configure Appium:
+
+    Start Appium server from the command line:
+
+       appium
+
+7.  Install the UI Automator 2 driver by running the following command in your terminal:
+
+           appium driver install uiautomator2
+
+8. Start Android Emulator:
+
+    Make sure you have an Android emulator running. You can start it from Android Studio or the command line:
+
+       emulator -avd <your_emulator_name>
+    
+9. Running Tests:
+
+    To run the tests, you can use the following Gradle tasks:
+
+       gradle runTests
+    
+## Project Structure
+
+- build.gradle: Gradle configuration file.
+- requirements.txt: Python dependencies.
+- src/test/python: Directory containing Python test scripts and page object models.
+
+## Sample Tests
+
+Here are the steps automated in the tests:
+
+1. Open a league page of your choice.
+2. Verify that the expected page opens correctly.
+3. Tap on a sub-tab standings.
+4. Verify that you are on the correct tab and that the data is displayed correctly and corresponds to the league, 
+   team, or player from step 1.
+5. Verify that back navigation returns you to the previous page correctly.
+
+## Configurable Data
+
+You can configure league, team, and player names in the data.yaml file, 
+making it easy to update the tests without changing the test scripts directly.
+
+## Example data.yaml:
+leagues:
+  NBA: "NBA"
+  BMA: "BMA"
+teams:
+  Lakers: "Lakers"
+players:
+  LeBron: "LeBron"
+
+## Updating Tests
+
+To update the league, team, or player names, simply modify the data.yaml file. The test scripts will use these values dynamically.
+
+## Deactivating the Virtual Environment
+
+When you are done working, you can deactivate the virtual environment by running:
+      
+      deactivate
+
+###
+
+     

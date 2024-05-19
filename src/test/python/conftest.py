@@ -2,6 +2,13 @@ import pytest
 from appium import webdriver
 from pages.base_page import BasePage
 from pages.locators.home_page_locators import HomePageLocators
+import yaml
+
+
+def load_config():
+    with open('''src\test\python\data.yaml''') as f:
+        return yaml.safe_load(f)
+
 
 @pytest.fixture(scope="module")
 def driver():
@@ -19,3 +26,8 @@ def driver():
 
     yield driver
     driver.quit()
+
+
+@pytest.fixture(scope="session")
+def config():
+    return load_config()
