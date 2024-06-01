@@ -127,9 +127,3 @@ class BasePage:
 
         actions = TouchAction(self.driver)
         actions.press(x=start_x, y=start_y).wait(ms=1000).move_to(x=end_x, y=end_y).release().perform()
-
-
-
-
-
-
