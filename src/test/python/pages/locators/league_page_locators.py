@@ -26,3 +26,7 @@ class LeaguePageLocators:
 
     # Continue button on "choose your favorite league" page
     CONTINUE_BUTTON = (MobileBy.ID, "com.fivemobile.thescore:id/btn_primary")
+
+    # Edit and Done button to close the tip window
+    EDIT_DONE_LOCATOR = (MobileBy.ID, "com.fivemobile.thescore:id/header_right_text")
+

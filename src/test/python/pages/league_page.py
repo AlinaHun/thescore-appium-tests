@@ -1,4 +1,6 @@
-from selenium.common.exceptions import TimeoutException
+import time
+
+from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -23,6 +25,8 @@ class LeaguePage(BasePage):
     def scroll_to_name(self, name):
         # Wait for leagues list
         self.wait_for_element(LeaguePageLocators.LEAGUES_LIST_MAIN)
+
+        self.close_popup()
 
         # Scroll to the specified name
         self.scroll_to_and_select_link(name)
@@ -85,4 +89,12 @@ class LeaguePage(BasePage):
         tab_locator = (By.XPATH, f"//android.widget.TextView[@text='{tab_name}' and @selected='true']")
         assert self.wait.until(EC.presence_of_element_located(tab_locator)).is_displayed()
 
-
+    def close_popup(self):
+        # Wait for Edit button
+        self.wait_for_element(LeaguePageLocators.EDIT_DONE_LOCATOR)
+        edit_button = self.driver.find_element(*LeaguePageLocators.EDIT_DONE_LOCATOR)
+        edit_button.click()
+        # Wait for Done button
+        self.wait_for_element(LeaguePageLocators.EDIT_DONE_LOCATOR)
+        done_button = self.driver.find_element(*LeaguePageLocators.EDIT_DONE_LOCATOR)
+        done_button.click()
