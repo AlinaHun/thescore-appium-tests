@@ -99,12 +99,10 @@ making it easy to update the tests without changing the test scripts directly.
 
 ## Example data.yaml:
 leagues:
-  NBA: "NBA"
-  BMA: "BMA"
-teams:
-  Lakers: "Lakers"
-players:
-  LeBron: "LeBron"
+  "name": "NBA"
+
+team:
+    "name": "BMA"
 
 ## Updating Tests
 

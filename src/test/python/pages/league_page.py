@@ -1,4 +1,6 @@
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 from .base_page import BasePage
 from .locators.league_page_locators import LeaguePageLocators
@@ -22,9 +24,6 @@ class LeaguePage(BasePage):
         # Wait for leagues list
         self.wait_for_element(LeaguePageLocators.LEAGUES_LIST_MAIN)
 
-        # Close quick tips
-        self.click_edit_button()
-
         # Scroll to the specified name
         self.scroll_to_and_select_link(name)
 
@@ -36,8 +35,12 @@ class LeaguePage(BasePage):
 
     # Method to verify the opened league
     def verify_opened_name(self, name):
-        # Wait for league to open
         self.wait_for_element(LeaguePageLocators.OPENED_NAME_LOCATOR)
+
+        # Wait until the text of the locator is different from 'Leagues'
+        WebDriverWait(self.driver, 10).until_not(
+            lambda driver: driver.find_element(*LeaguePageLocators.OPENED_NAME_LOCATOR).text == "Leagues"
+        )
 
         # Verify that the opened name matches the specified name
         opened_name_element = self.driver.find_element(*LeaguePageLocators.OPENED_NAME_LOCATOR)
@@ -82,6 +85,4 @@ class LeaguePage(BasePage):
         tab_locator = (By.XPATH, f"//android.widget.TextView[@text='{tab_name}' and @selected='true']")
         assert self.wait.until(EC.presence_of_element_located(tab_locator)).is_displayed()
 
-    def close_quick_tip(self):
-        # Press edit button
-        self.click_edit_button()
+

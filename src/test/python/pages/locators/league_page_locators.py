@@ -12,7 +12,7 @@ class LeaguePageLocators:
         return MobileBy.XPATH, f"//*[@text='{league_name}']"
 
     # Locator for the opened name element
-    OPENED_NAME_LOCATOR = (MobileBy.ID, "com.fivemobile.thescore:id/titleTextView")
+    OPENED_NAME_LOCATOR = (MobileBy.XPATH, '''//android.widget.TextView[@resource-id="com.fivemobile.thescore:id/titleTextView"]''')
 
     # Locator for standings tab
     STANDINGS_TAB = (MobileBy.XPATH, '''//android.widget.TextView[@text="STANDINGS"]''')

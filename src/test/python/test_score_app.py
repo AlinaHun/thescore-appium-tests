@@ -3,10 +3,10 @@ from pages.league_page import LeaguePage
 from pages.home_page import HomePage
 
 
-@pytest.mark.parametrize("league", ["NFL"])
 # Test case to navigate through the app
-def test_league_team_player_navigation(driver, config, league):
-    league_name = league
+def test_league_team_player_navigation(driver, config):
+
+    league_name = config["leagues"]["name"]
 
     # Initialize HomePage
     home_page = HomePage(driver)

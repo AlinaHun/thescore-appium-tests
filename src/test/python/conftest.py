@@ -6,7 +6,7 @@ import yaml
 
 
 def load_config():
-    with open('''data.yaml''') as f:
+    with open('''src/test/python/data.yaml''') as f:
         return yaml.safe_load(f)
 
 

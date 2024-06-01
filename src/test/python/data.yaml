@@ -1,5 +1,5 @@
-league:
-  - BMA
+leagues:
+  "name": "NBA"
 
 team:
-  -LAL
+    "name": "BMA"
