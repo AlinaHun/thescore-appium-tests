@@ -10,7 +10,7 @@ def load_config():
         return yaml.safe_load(f)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def driver():
     desired_caps = {
         "platformName": "Android",
