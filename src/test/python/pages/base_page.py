@@ -1,6 +1,4 @@
 import time
-from appium.webdriver.common.touch_action import TouchAction
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -117,13 +115,15 @@ class BasePage:
 
     def scroll_down(self):
         """
-        Scrolls down the page using TouchAction.
+        Scrolls down the page using the swipe method.
         """
-        screen_size = self.driver.get_window_size()
-        start_x = screen_size['width'] // 2
-        start_y = screen_size['height'] * 3 // 4
-        end_x = screen_size['width'] // 2
-        end_y = screen_size['height'] // 4
+        try:
+            screen_size = self.driver.get_window_size()
+            start_x = screen_size['width'] // 2
+            start_y = screen_size['height'] * 3 // 4
+            end_x = screen_size['width'] // 2
+            end_y = screen_size['height'] // 4
 
-        actions = TouchAction(self.driver)
-        actions.press(x=start_x, y=start_y).wait(ms=1000).move_to(x=end_x, y=end_y).release().perform()
+            self.driver.swipe(start_x, start_y, end_x, end_y, 1000)
+        except Exception as e:
+            print(f"Exception occurred: {e}")
